@@ -13,9 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class PhotoQuiz {
-		
 
 	// 1. find an image on the internet
 
@@ -27,33 +27,50 @@ public class PhotoQuiz {
 		// This will make st, and put its URL in a String
 		// variable (from your browser, right click on the image, and select
 		// â€œCopy Image Addressâ€�)
-String url = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Question_mark_alternate.svg/788px-Question_mark_alternate.svg.png";
-url = "https://cdn.pixabay.com/photo/2017/02/13/01/26/the-question-mark-2061539_960_720.png";
+		String file = "QuestoinMark.png";
 		// 2. create a variable of type "Component" that will hold your image
-Component image;
-		// 3. use the "createImage()" method below to initialize your Component
-image = createImage(url);
-		// 4. add the image to the quiz window
-quizWindow.add(image);
-		// 5. call the pack() method on the quiz window
-quizWindow.pack();
-		// 6. ask a question that relates to the image
 
+		JLabel image;
+		// 3. use the "createImage()" method below to initialize your Component
+		image = createLabelImage(file);
+		// 4. add the image to the quiz window
+		quizWindow.add(image);
+		// 5. cal93l the pack() method on the quiz window
+		quizWindow.pack();
+		// 6. ask a question that relates to the image
+String answer = JOptionPane.showInputDialog(quizWindow,"Is this picture used in some sentences?");
 		// 7. print "CORRECT" if the user gave the right answer
 //the quiz window (you may not see the
 		// effect of this until step 12)
-
+if(answer.equalsIgnoreCase("yes")) {
+JOptionPane.showMessageDialog(quizWindow, "Correct");	
+}else {
+	JOptionPane.showMessageDialog(quizWindow, "Incorrect");
+}
 		// 10. find another image and create it (might take more than one line
 		// of code)
+String file2 = "ExclamationMark.png";
+// 2. create a variable of type "Component" that will hold your image
+quizWindow.remove(image);
+// 3. use the "createImage()" method below to initialize your Component
+image = createLabelImage(file2);
+// 4. add the image to the quiz window
+quizWindow.add(image);
+// 5. cal93l the pack() method on the quiz window
+quizWindow.pack();
 
 		// 11. add the second image to the quiz window
 
 		// 12. pack the quiz window
 
 		// 13. ask another question
-
+String answer2 = JOptionPane.showInputDialog(quizWindow,"Is this picture used in some sentences?");
 		// 14+ check answer, say if correct or incorrect, etc.
-
+if(answer2.equalsIgnoreCase("yes")) {
+JOptionPane.showMessageDialog(quizWindow, "Correct");	
+}else {
+	JOptionPane.showMessageDialog(quizWindow, "Incorrect");
+}
 	}
 
 	private Component createImage(String imageUrl) throws MalformedURLException {
@@ -63,6 +80,16 @@ quizWindow.pack();
 		// 8. print "INCORRECT" if the answer is wrong
 
 		// 9. remove the component from
+		return imageLabel;
+	}
+	private JLabel createLabelImage(String fileName) throws MalformedURLException {
+		URL imageURL = getClass().getResource(fileName);
+		if (imageURL == null) {
+			System.err.println("Could not find image " + fileName);
+			return new JLabel();
+		}
+		Icon icon = new ImageIcon(imageURL);
+		JLabel imageLabel = new JLabel(icon);
 		return imageLabel;
 	}
 
