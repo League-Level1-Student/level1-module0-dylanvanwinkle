@@ -1,6 +1,7 @@
 int x = 100;
 int y = 100;
 int score = 0;
+boolean win = false;
 void draw(){
 background(0,0,255);
     fill(0,255,0);
@@ -10,7 +11,12 @@ background(0,0,255);
                 fill(0, 0, 0);
     textSize(16);
     text("Score: " + score, 20, 20);
-    y += 4;
+    y += 8;
+    if(score >= 64 || win == true){
+      win = true;
+          textSize(24);
+    text("You Win",280, 300);
+    }
     if(y > height){
       checkCatch(x);
         x = (int) random(width);
